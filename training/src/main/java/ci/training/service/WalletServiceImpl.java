@@ -67,7 +67,17 @@ public class WalletServiceImpl implements WalletService{
 
 	public Customer fundTransfer(String fromPhone, String toPhone, BigDecimal amount) {
 		// TODO Auto-generated method stub
-		return null;
+		Customer one = repo.find(fromPhone);
+		Customer two = repo.find(toPhone);
+		if(one == null || two == null){
+			return null;
+		}
+		if(one.getWallet().getBalance().compareTo(amount) < 0){
+			throw new InsufficientBalanceException();
+		}
+		two.getWallet().setBalance(two.getWallet().getBalance().add(amount));
+		one.getWallet().setBalance(one.getWallet().getBalance().subtract(amount));
+		return two;
 	}
 	
 	

@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 
 import ci.training.beans.Customer;
 import ci.training.beans.Wallet;
+import ci.training.exceptions.InsufficientBalanceException;
 import ci.training.repo.WalletRepo;
 import ci.training.service.WalletService;
 import ci.training.service.WalletServiceImpl;
@@ -123,7 +124,37 @@ public class WalletServiceTest {
 		assertTrue(service.deposit("9876544", new BigDecimal(9999))==null);
 	}
 	
+	@Test
+	public void test_FundTransfer_NoAccount(){
+		when(repo.find("9876544")).thenReturn(null);
+		assertTrue(service.deposit("9876544", new BigDecimal(9999))==null);
+	}
 	
+	@Test
+	public void test_FundTransfer_Success(){
+		String phoneOne = "9850276767";
+		String phoneTwo = "9830478275";
+		Customer one = new Customer("AAA", phoneOne, new Wallet(new BigDecimal(400)));
+		Customer two = new Customer("BBB", phoneTwo, new Wallet(new BigDecimal(100)));
+		when(repo.find(phoneOne)).thenReturn(one);
+		when(repo.find(phoneTwo)).thenReturn(two);
+		
+		two = service.fundTransfer(phoneOne, phoneTwo, new BigDecimal(200));
+		assertTrue(two.getWallet().getBalance().equals(new BigDecimal(300)));
+		assertTrue(one.getWallet().getBalance().equals(new BigDecimal(200)));
+	}
+	
+	@Test(expected = InsufficientBalanceException.class)
+	public void test_FundTransfer_NotEnoughMoney(){
+		String phoneOne = "9850276767";
+		String phoneTwo = "9830478275";
+		Customer one = new Customer("AAA", phoneOne, new Wallet(new BigDecimal(200)));
+		Customer two = new Customer("BBB", phoneTwo, new Wallet(new BigDecimal(100)));
+		when(repo.find(phoneOne)).thenReturn(one);
+		when(repo.find(phoneTwo)).thenReturn(two);
+		
+		two = service.fundTransfer(phoneOne, phoneTwo, new BigDecimal(300));
+	}
 	
 	
 	

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testrun name="WalletServiceTest" project="training" tests="12" started="12" failures="0" errors="0" ignored="0">
+<testsuite name="ci.training.WalletServiceTest" time="0.094">
+<testcase name="test_FundTransfer_NoAccount" classname="ci.training.WalletServiceTest" time="0.094"/>
+<testcase name="test_showBalance_returnsNullForInvalidAccount" classname="ci.training.WalletServiceTest" time="0.0"/>
+<testcase name="test_deposit_returnsNullForInvalidAccount" classname="ci.training.WalletServiceTest" time="0.0"/>
+<testcase name="test_deposit_amountShouldNotBeLessThanZero" classname="ci.training.WalletServiceTest" time="0.0"/>
+<testcase name="test_deposit_success" classname="ci.training.WalletServiceTest" time="0.0"/>
+<testcase name="test_showBalance_throwsExceptionForIllegalArguments" classname="ci.training.WalletServiceTest" time="0.0"/>
+<testcase name="test_showBalance_success" classname="ci.training.WalletServiceTest" time="0.0"/>
+<testcase name="test_createWallet_success" classname="ci.training.WalletServiceTest" time="0.0"/>
+<testcase name="test_withdraw_returnsNullForInvalidAccount" classname="ci.training.WalletServiceTest" time="0.0"/>
+<testcase name="test_withdraw_insufficientBalance" classname="ci.training.WalletServiceTest" time="0.0"/>
+<testcase name="test_withdraw_success" classname="ci.training.WalletServiceTest" time="0.0"/>
+<testcase name="test_createWallet_throwsExceptionForIlllegalArguments" classname="ci.training.WalletServiceTest" time="0.0"/>
+</testsuite>
+</testrun>
